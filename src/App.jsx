@@ -11,7 +11,7 @@ import ReactFlow, {
 
 import 'reactflow/dist/style.css';
 
-import Sidebar from './sidebar';
+import Sidebar from './Sidebar';
 
 import './index.css';
 
