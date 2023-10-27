@@ -8,7 +8,7 @@ export default () => {
 
   return (
     <aside>
-      <div className="description">Intent Nodes</div>
+      <div className="description">Intents</div>
       <div className="dndnode input" onDragStart={(event) => onDragStart(event, 'input')} draggable>
         Input Node
       </div>
@@ -18,6 +18,9 @@ export default () => {
       <div className="dndnode output" onDragStart={(event) => onDragStart(event, 'output')} draggable>
         Output Node
       </div>
+
+      <div className="description">Utterances</div>
+
     </aside>
   );
 };
