@@ -13,14 +13,13 @@ import Sidebar from './Sidebar';
 import './index.css';
 import AudioDropzone from './AudioDropzone';
 import useAudio from './useAudio';
-
-
+import TextUpdaterNode from './TextUpdaterNode';
 
 
 const initialNodes = [
   {
     id: '1',
-    type: 'input',
+    type: 'default',
     data: { label: 'input node' },
     position: { x: 250, y: 5 },
   },
@@ -29,6 +28,8 @@ const initialNodes = [
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
+
+const nodeTypes = { textUpdater: TextUpdaterNode };
 
 
 export default function App() {
@@ -86,15 +87,15 @@ export default function App() {
 
       const newNode = {
         id: getId(),
-        type,
+        type, 
         position,
-        data: { label: `${type} node` },
+        data: type === 'textUpdater' ? { label: 'Type your text here' } : { label: `${type} node` }
       };
 
       setNodes((nds) => nds.concat(newNode));
     },
     [reactFlowInstance]
-  );
+);
 
 
   return (
@@ -106,6 +107,7 @@ export default function App() {
           <ReactFlow
             onNodeClick={handleNodeClick}
             nodes={nodes}
+            nodeTypes={nodeTypes}
             edges={edges}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}

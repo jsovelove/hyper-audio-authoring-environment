@@ -19,8 +19,10 @@ export default () => {
         Output Node
       </div>
 
-      <div className="description">Utterances</div>
-
+      <div className="description">Utterance</div>
+      <div className="dndnode utterance" onDragStart={(event) => onDragStart(event, 'textUpdater')} draggable>
+        Utterance Node
+      </div>
     </aside>
   );
 };
