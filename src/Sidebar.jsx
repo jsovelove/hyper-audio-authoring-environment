@@ -9,16 +9,13 @@ export default () => {
   return (
     <aside>
       <div className="description">Intents</div>
-      <div className="dndnode input" onDragStart={(event) => onDragStart(event, 'input')} draggable>
-        Input Node
+      <div className="dndnode branchingPoint" onDragStart={(event) => onDragStart(event, 'branchingPoint')} draggable>
+        Branching Point
       </div>
-      <div className="dndnode" onDragStart={(event) => onDragStart(event, 'default')} draggable>
-        Default Node
+      <div className="dndnode grouper" onDragStart={(event) => onDragStart(event, 'grouper')} draggable>
+        Grouper Node
       </div>
-      <div className="dndnode output" onDragStart={(event) => onDragStart(event, 'output')} draggable>
-        Output Node
-      </div>
-
+      
       <div className="description">Utterance</div>
       <div className="dndnode utterance" onDragStart={(event) => onDragStart(event, 'textUpdater')} draggable>
         Utterance Node

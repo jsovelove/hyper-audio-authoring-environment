@@ -14,22 +14,22 @@ import './index.css';
 import AudioDropzone from './AudioDropzone';
 import useAudio from './useAudio';
 import TextUpdaterNode from './TextUpdaterNode';
-
+import BranchingPointNode from './BranchingPointNode';
+import GrouperNode from './GrouperNode';
 
 const initialNodes = [
-  {
-    id: '1',
-    type: 'default',
-    data: { label: 'input node' },
-    position: { x: 250, y: 5 },
-  },
+  
 ];
 
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-const nodeTypes = { textUpdater: TextUpdaterNode };
+const nodeTypes = { 
+  textUpdater: TextUpdaterNode,
+  branchingPoint: BranchingPointNode,
+  grouper: GrouperNode
+ };
 
 
 export default function App() {
@@ -39,8 +39,6 @@ export default function App() {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
-
   const { loadAudio, playAudio } = useAudio();
 
   const handleAudioFilesReceived = async (files) => {
@@ -72,31 +70,71 @@ export default function App() {
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
-
+  
       const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
       const type = event.dataTransfer.getData('application/reactflow');
-
-      if (typeof type === 'undefined' || !type) {
+  
+      if (!type) {
         return;
       }
-
+  
       const position = reactFlowInstance.project({
         x: event.clientX - reactFlowBounds.left,
         y: event.clientY - reactFlowBounds.top,
       });
+  
+      let newNode;
+  
+      switch (type) {
+        case 'grouper':
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          data: { label: 'Group Name' },
+        };
+        break;
 
-      const newNode = {
-        id: getId(),
-        type, 
-        position,
-        data: type === 'textUpdater' ? { label: 'Type your text here' } : { label: `${type} node` }
-      };
-
+        case 'textUpdater':
+          newNode = {
+            id: getId(),
+            type,
+            position,
+            data: { label: 'Type your text here' },
+          };
+          break;
+        
+        case 'branchingPoint':
+          newNode = {
+            id: getId(),
+            type,
+            position,
+            data: { label: 'Branching Point' },
+          };
+          break;
+        
+        case 'input':
+        case 'default':
+        case 'output':
+          newNode = {
+            id: getId(),
+            type,
+            position,
+            data: { label: `${type} node` },
+          };
+          break;
+  
+        default:
+          console.error('Unknown node type:', type);
+          return;
+      }
+  
       setNodes((nds) => nds.concat(newNode));
     },
     [reactFlowInstance]
-);
-
+  );
+  
+    
 
   return (
 
