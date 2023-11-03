@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import WaveSurfer from 'wavesurfer.js';
+import { Handle, Position } from 'reactflow';
 
 
-const CustomAudioNode = ({ data }) => {
+
+const CustomAudioNode = ({ data, isConnectable}) => {
   const { audioSource } = data;
   const [isPlaying, setIsPlaying] = useState(false);
   const waveformRef = useRef(null);
@@ -13,7 +15,7 @@ const CustomAudioNode = ({ data }) => {
       container: waveformRef.current,
       waveColor: 'violet',
       progressColor: 'purple',
-      barWidth: 3
+      barWidth: 1
     });
 
     if (audioSource) {
@@ -33,13 +35,32 @@ const CustomAudioNode = ({ data }) => {
   };
 
   return (
-    <div>
-      <button onClick={handlePlayPause}>
+    <div className="audio-node-container">
+        <Handle
+        type="target"
+        position={Position.Right}
+        id="right-target"
+        isConnectable={isConnectable}
+      />
+        <Handle
+        type="target"
+        position={Position.Top}
+        id="top-target"
+        isConnectable={isConnectable}
+      />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="bottom-source"
+        isConnectable={isConnectable}
+      />
+      <button className="audio-control-button" onClick={handlePlayPause}>
         {isPlaying ? 'Pause' : 'Play'}
       </button>
-      <div ref={waveformRef} />
+      <div className="waveform-container" ref={waveformRef} />
     </div>
   );
+  
 };
 
 export default CustomAudioNode;

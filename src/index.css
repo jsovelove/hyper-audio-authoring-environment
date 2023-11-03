@@ -123,3 +123,25 @@ body {
   margin-right: 10px;
   flex: 1;
 }
+
+.audio-node-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  width: 300px;
+  overflow: hidden;
+}
+
+.audio-control-button {
+  margin-right: 10px;
+}
+
+.waveform-container {
+  flex-grow: 1;
+  min-width: 200px;
+  height: 100px;
+  overflow: hidden;
+}
+

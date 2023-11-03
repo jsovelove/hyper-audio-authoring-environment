@@ -9,9 +9,6 @@ export default () => {
   return (
     <aside>
       <div className="description">Intents</div>
-      <div className="dndnode input" onDragStart={(event) => onDragStart(event, 'input')} draggable>
-        Input Node
-      </div>
       <div className="dndnode branchingPoint" onDragStart={(event) => onDragStart(event, 'branchingPoint')} draggable>
         Branching Point
       </div>
