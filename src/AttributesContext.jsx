@@ -4,7 +4,7 @@ export const AttributesContext = createContext();
 
 export const AttributesProvider = ({ children }) => {
     const [globalAttributes, setGlobalAttributes] = useState({});
-    const [nodeLinks, setNodeLinks] = useState({}); // state to track the links between nodes
+    const [nodeLinks, setNodeLinks] = useState({});
 
     return (
         <AttributesContext.Provider value={{ globalAttributes, setGlobalAttributes, nodeLinks, setNodeLinks }}>

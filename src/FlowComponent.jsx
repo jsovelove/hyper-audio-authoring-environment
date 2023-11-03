@@ -18,7 +18,6 @@ import BranchingPointNode from './BranchingPointNode';
 import GrouperNode from './GrouperNode';
 import AttributeNode from './AttributeNode';
 import CustomAudioNode from './AudioNode';
-import { AttributesProvider, useAttributes } from './AttributesContext';
 
 const initialNodes = [
   
@@ -40,30 +39,23 @@ export default function FlowComponent() {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
-    const [nodeLinks, setNodeLinks] = useState({});
-
-    const { globalAttributes, setGlobalAttributes } = useAttributes();
 
     const onConnect = useCallback((params) => {
         setEdges((eds) => addEdge(params, eds));
     
-        if (params.sourceType === 'attribute' || params.targetType === 'attribute') {
-            const attributeNodeId = params.sourceType === 'attribute' ? params.source : params.target;
-            const audioNodeId = params.sourceType === 'attribute' ? params.target : params.source;
+        const sourceNode = nodes.find(node => node.id === params.source);
+        const targetNode = nodes.find(node => node.id === params.target);
     
-            setNodeLinks(prevLinks => {
-                let updatedLinks = { ...prevLinks };
-    
-                if (updatedLinks[attributeNodeId]) {
-                    updatedLinks[attributeNodeId].push(audioNodeId);
-                } else {
-                    updatedLinks[attributeNodeId] = [audioNodeId];
-                }
-    
-                return updatedLinks;
-            });
+        if (sourceNode.data.type === 'attribute' && targetNode.data.type === 'audio') {
+            targetNode.data.audioAttributes = sourceNode.data.attributes;
+            onNodesChange([...nodes]);
+        } else if (targetNode.data.type === 'attribute' && sourceNode.data.type === 'audio') {
+            sourceNode.data.audioAttributes = targetNode.data.attributes;
+            onNodesChange([...nodes]);
         }
-    }, [setEdges]);
+    
+    }, [setEdges, nodes, onNodesChange]);
+    
     
     
 
