@@ -10,12 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mui/icons-material": "^5.14.15",
-    "@mui/material": "^5.14.15",
     "react": "^18.2.0",
+    "react-audio-player": "^0.17.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-    "reactflow": "^11.9.4"
+    "reactflow": "^11.9.4",
+    "wavesurfer.js": "^7.4.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

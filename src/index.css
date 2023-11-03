@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Mono+One&family=Sometype+Mono&display=swap');
 
 body {
-  overflow: hidden; /* Hide scrollbars */
+  overflow: hidden;
   font-family: 'Roboto', sans-serif;
 
 }
@@ -79,10 +79,9 @@ body {
 }
 
 .branching-point-node {
-  height: 20px;
+  height: 70px;
   padding: 4px;
-  border: 1px solid #1a192b;
-  border-radius: 2px;
+  border: 1px solid #eee;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
@@ -93,13 +92,34 @@ body {
 .grouper-node {
   width: 300px; 
   height: 300px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 2px dashed #666;
+  background-color: rgba(204, 173, 173, 0.363);
+  border: 2px dashed #000000;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: relative; 
-  overflow: hidden; 
+  justify-content: flex-start;
 }
 
+
+
+.group-name {
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+.attribute-node {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.attribute-node label {
+  font-weight: bold;
+  margin-right: 10px;
+  flex: 1;
+}

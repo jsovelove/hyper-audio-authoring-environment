@@ -16,6 +16,8 @@ import useAudio from './useAudio';
 import TextUpdaterNode from './TextUpdaterNode';
 import BranchingPointNode from './BranchingPointNode';
 import GrouperNode from './GrouperNode';
+import AttributeNode from './AttributeNode';
+import CustomAudioNode from './AudioNode';
 
 const initialNodes = [
   
@@ -28,7 +30,9 @@ const getId = () => `dndnode_${id++}`;
 const nodeTypes = { 
   textUpdater: TextUpdaterNode,
   branchingPoint: BranchingPointNode,
-  grouper: GrouperNode
+  grouper: GrouperNode,
+  attribute: AttributeNode,
+  audio: CustomAudioNode,
  };
 
 
@@ -39,27 +43,40 @@ export default function App() {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-  const { loadAudio, playAudio } = useAudio();
-
-  const handleAudioFilesReceived = async (files) => {
-    const newNodes = await Promise.all(files.map(async (file, index) => {
-      const audioSource = await loadAudio(file);
-
-      return {
-        id: `audio${index}`,
-        position: { x: index * 100, y: 50 },
-        data: { label: file.name, audioSource },
+  
+  const loadAudio = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        resolve(reader.result);
       };
+      reader.onerror = reject;
+    });
+  };
+  
+  const handleAudioFilesReceived = async (files) => {
+    const spacing = 50;
+    const newNodes = await Promise.all(files.map(async (file, index) => {
+        const audioSource = await loadAudio(file);
+        const x = 50;
+        const y = index * spacing;
+    
+        return {
+            id: `audio${index}`,
+            type: 'audio',
+            position: { x, y },
+            data: { label: file.name, audioSource },
+        };
     }));
-
+    
     setNodes((prevNodes) => [...prevNodes, ...newNodes]);
-  };
+};
 
-  const handleNodeClick = (event, element) => {
-    if (element && element.data && element.data.audioSource) {
-      playAudio(element.data.audioSource);
-    }
-  };
+  
+  
+
+
 
 
   const onDragOver = useCallback((event) => {
@@ -92,6 +109,15 @@ export default function App() {
           type,
           position,
           data: { label: 'Group Name' },
+        };
+        break;
+        
+        case 'attribute':
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          data: { label: '' },
         };
         break;
 
@@ -143,7 +169,6 @@ export default function App() {
         <div className="reactflow-wrapper" ref={reactFlowWrapper}>
           <AudioDropzone onAudioFilesReceived={handleAudioFilesReceived} />
           <ReactFlow
-            onNodeClick={handleNodeClick}
             nodes={nodes}
             nodeTypes={nodeTypes}
             edges={edges}
