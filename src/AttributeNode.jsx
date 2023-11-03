@@ -1,5 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect} from 'react';
 import { Handle } from 'reactflow';
+import { AttributesProvider, useAttributes } from './AttributesContext';
+
 
 function AttributeNode({ data }) {
     const [attributes, setAttributes] = useState([{ name: '', value: '' }]);
@@ -19,6 +21,14 @@ function AttributeNode({ data }) {
     const addAttribute = () => {
         setAttributes([...attributes, { name: '', value: '' }]);
     };
+
+   /*  const [globalAttributes, setGlobalAttributes] = useAttributes();
+
+    useEffect(() => {
+        setGlobalAttributes(prev => ({ ...prev, [data.id]: attributes }));
+    }, [attributes, setGlobalAttributes, data.id]);
+
+    console.log(globalAttributes, setGlobalAttributes); */
 
     return (
         <div className="attribute-node">
