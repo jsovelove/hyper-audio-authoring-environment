@@ -37,9 +37,9 @@ const CustomAudioNode = ({ data, isConnectable}) => {
   return (
     <div className="audio-node-container">
         <Handle
-        type="target"
+        type="source"
         position={Position.Right}
-        id="right-target"
+        id="right-source"
         isConnectable={isConnectable}
       />
         <Handle
@@ -49,9 +49,9 @@ const CustomAudioNode = ({ data, isConnectable}) => {
         isConnectable={isConnectable}
       />
       <Handle
-        type="source"
-        position={Position.Bottom}
-        id="bottom-source"
+        type="target"
+        position={Position.Left}
+        id="left-source"
         isConnectable={isConnectable}
       />
       <button className="audio-control-button" onClick={handlePlayPause}>

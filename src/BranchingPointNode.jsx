@@ -23,6 +23,12 @@ function BranchingPointNode({ data, isConnectable }) {
         id="output_2"
         isConnectable={isConnectable} 
       />
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        id="input_1"
+        isConnectable={isConnectable} 
+      />
     </div>
   );
 }

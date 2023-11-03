@@ -16,7 +16,19 @@ function TextUpdaterNode({ data, isConnectable }) {
       <Handle
         type="source"
         position={Position.Bottom}
-        id="a"
+        id="utterance-source-bottom"
+        isConnectable={isConnectable}
+      />
+      <Handle
+        type="source"
+        position={Position.Right}
+        id="utterance-source-right"
+        isConnectable={isConnectable}
+      />
+      <Handle
+        type="target"
+        position={Position.Left}
+        id="utterance-target-left"
         isConnectable={isConnectable}
       />
     </div>

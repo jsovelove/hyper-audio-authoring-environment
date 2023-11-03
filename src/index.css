@@ -114,14 +114,23 @@ body {
   padding: 10px;
   background-color: #f9f9f9;
   border-radius: 5px;
-  display: flex;
-  align-items: center;
 }
 
 .attribute-node label {
   font-weight: bold;
   margin-right: 10px;
   flex: 1;
+}
+
+
+.attribute-pair {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;  
+}
+
+.attribute-field {
+  margin-bottom: 5px;
 }
 
 .audio-node-container {

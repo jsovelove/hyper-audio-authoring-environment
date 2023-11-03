@@ -56,28 +56,24 @@ export default function App() {
   };
   
   const handleAudioFilesReceived = async (files) => {
-    const spacing = 50;
+    const spacing = 50; // Adjust this value to control the spacing between nodes.
+    const currentNodesCount = nodes.length; // Get the current count of nodes
+  
     const newNodes = await Promise.all(files.map(async (file, index) => {
-        const audioSource = await loadAudio(file);
-        const x = 50;
-        const y = index * spacing;
-    
-        return {
-            id: `audio${index}`,
-            type: 'audio',
-            position: { x, y },
-            data: { label: file.name, audioSource },
-        };
+      const audioSource = await loadAudio(file);
+      const x = 50;
+      const y = (currentNodesCount + index) * spacing;
+  
+      return {
+        id: `audio${currentNodesCount + index}`,
+        type: 'audio',
+        position: { x, y },
+        data: { label: file.name, audioSource },
+      };
     }));
-    
+  
     setNodes((prevNodes) => [...prevNodes, ...newNodes]);
 };
-
-  
-  
-
-
-
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
