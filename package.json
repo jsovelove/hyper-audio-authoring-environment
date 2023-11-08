@@ -15,7 +15,8 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "reactflow": "^11.9.4",
-    "wavesurfer.js": "^7.4.2"
+    "wavesurfer.js": "^7.4.2",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

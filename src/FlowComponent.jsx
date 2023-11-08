@@ -18,6 +18,7 @@ import BranchingPointNode from './BranchingPointNode';
 import GrouperNode from './GrouperNode';
 import AttributeNode from './AttributeNode';
 import CustomAudioNode from './AudioNode';
+import DatabaseView from './DatabaseView'; 
 
 const initialNodes = [
   
@@ -172,7 +173,11 @@ export default function FlowComponent() {
     );
 
 
+    const [showDatabaseView, setShowDatabaseView] = useState(false);
 
+    const toggleDatabaseView = () => {
+        setShowDatabaseView(!showDatabaseView);
+    };
 
     return (
         <ReactFlowProvider>
@@ -190,8 +195,13 @@ export default function FlowComponent() {
                     onDragOver={onDragOver}
                     fitView
                 >
+                    <Background color="#ccc" variant="dots" />
                     <Controls />
+                    <button className="toggle-db-view-btn" onClick={toggleDatabaseView}>
+                        {showDatabaseView ? 'Hide Database View' : 'Show Database View'}
+                    </button>
                 </ReactFlow>
+                {showDatabaseView && <DatabaseView nodes={nodes} />}
             </div>
             <Sidebar />
         </ReactFlowProvider>

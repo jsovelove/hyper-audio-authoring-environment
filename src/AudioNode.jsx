@@ -7,7 +7,7 @@ const CustomAudioNode = ({ data, isConnectable }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
-  
+  console.log(audioAttributes)
  
   useEffect(() => {
     wavesurfer.current = WaveSurfer.create({
@@ -60,7 +60,7 @@ const CustomAudioNode = ({ data, isConnectable }) => {
       <div className="waveform-container" ref={waveformRef} />
       {audioAttributes && audioAttributes.map(attr => (
         <div key={attr.name}>
-          <span>{attr.name}: </span>
+          <span>{attr.name}:</span>
           <span>{attr.value}</span>
         </div>
       ))}
