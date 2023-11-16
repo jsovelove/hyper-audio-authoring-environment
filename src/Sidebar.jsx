@@ -12,8 +12,8 @@ export default () => {
       <div className="dndnode branchingPoint" onDragStart={(event) => onDragStart(event, 'branchingPoint')} draggable>
         Branching Point
       </div>
-      <div className="dndnode grouper" onDragStart={(event) => onDragStart(event, 'grouper')} draggable>
-        Grouper Node
+      <div className="dndnode grouper" onDragStart={(event) => onDragStart(event, 'playlist')} draggable>
+        Playlist Builder
       </div>
       <div className="dndnode attribute" onDragStart={(event) => onDragStart(event, 'attribute')} draggable>
         Attribute Node

@@ -1,13 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo} from 'react';
 import WaveSurfer from 'wavesurfer.js';
-import { Handle, Position } from 'reactflow';
+import { Handle, Position, NodeToolbar, useStore, useReactFlow} from 'reactflow';
+import useDetachNodes from './useDetachNodes';
 
-const CustomAudioNode = ({ data, isConnectable }) => {
+const CustomAudioNode = ({ data, isConnectable, id }) => {
+
+  const hasParent = useStore((store) => !!store.nodeInternals.get(id)?.parentNode);
+  const { deleteElements } = useReactFlow();
+  const detachNodes = useDetachNodes();
+
+  const onDelete = () => deleteElements({ nodes: [{ id }] });
+  const onDetach = () => detachNodes([id]);
+
   const { audioSource, audioAttributes } = data;
   const [isPlaying, setIsPlaying] = useState(false);
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
-  console.log(audioAttributes)
  
   useEffect(() => {
     wavesurfer.current = WaveSurfer.create({
@@ -35,9 +43,13 @@ const CustomAudioNode = ({ data, isConnectable }) => {
 
   return (
     <div className="audio-node-container">
+      <NodeToolbar className="nodrag">
+        <button onClick={onDelete}>Delete</button>
+        {hasParent && <button onClick={onDetach}>Detach</button>}
+      </NodeToolbar>
         <Handle
           type="source"
-          position={Position.Right}
+          position={Position.Bottom}
           id="right-source"
           isConnectable={isConnectable}
         />
@@ -68,4 +80,4 @@ const CustomAudioNode = ({ data, isConnectable }) => {
   );
 };
 
-export default CustomAudioNode;
+export default memo(CustomAudioNode);

@@ -1,14 +1,15 @@
-import React from 'react';
+import ReactFlow, { ReactFlowProvider } from 'reactflow';
 import FlowComponent from './FlowComponent';
-import { AttributesProvider } from './AttributesContext';
 
-export default function App() {
+function App() {
   return (
-    <AttributesProvider>
-      <div className="dndflow" style={{ width: '100vw', height: '100vh' }}>
+    <div className="dndflow" style={{ width: '100vw', height: '100vh' }}>
+      <ReactFlowProvider>
         <FlowComponent />
-      </div>
-    </AttributesProvider>
+      </ReactFlowProvider>
+    </div>
 
   );
 }
+
+export default App;
