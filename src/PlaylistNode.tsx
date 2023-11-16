@@ -9,6 +9,8 @@ const padding = 25;
 
 function PlaylistNode({ id }: NodeProps) {
   const store = useStoreApi();
+  
+  
   const { deleteElements } = useReactFlow();
   const detachNodes = useDetachNodes();
   const { minWidth, minHeight, hasChildNodes } = useStore((store) => {
