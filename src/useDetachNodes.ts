@@ -3,7 +3,7 @@ import { useReactFlow, useStoreApi } from 'reactflow';
 
 function useDetachNodes() {
   const { setNodes } = useReactFlow();
-  const store = useStoreApi();  
+  const store = useStoreApi();
 
   const detachNodes = useCallback(
     (ids: string[], removeParentId?: string) => {
@@ -19,6 +19,10 @@ function useDetachNodes() {
             },
             extent: undefined,
             parentNode: undefined,
+            data: {
+              ...n.data,
+              playlist: undefined,
+            },
           };
         }
         return n;

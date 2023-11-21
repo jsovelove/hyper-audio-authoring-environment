@@ -165,6 +165,12 @@ function FlowComponent() {
                             parentNode: playlistNode.id,
                             dragging: false,
                             extent: 'parent',
+                            data: {
+                                ...n.data,
+                                playlist: playlistNode.data.name || '',
+                              },
+                  
+                  
                         };
                     }
 

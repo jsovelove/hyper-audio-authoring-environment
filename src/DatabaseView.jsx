@@ -6,11 +6,14 @@ const DatabaseView = ({ nodes }) => {
     <div className="database-view-container">
       {nodes.map((node) => {
         if (node.type === 'audio') {
-          const hasParent = node.parentNode !== undefined;
+          const playlistName = node.data.playlist;
+          const order = node.data.order;
+
           return (
             <div key={node.id} className="audio-node-entry">
               <div>{node.data.label}</div>
-              {hasParent && <div>Parent Node ID: {node.parentNode}</div>}
+              {playlistName && <div>Playlist Name: {playlistName}</div>}
+              {order && <div>Order: {order}</div>} {/* Display the 'order' field */}
             </div>
           );
         }

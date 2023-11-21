@@ -112,8 +112,11 @@ body {
 
 .playlist-name {
   text-align: center;
-  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: bold;
 }
+
 
 
 .attribute-node {

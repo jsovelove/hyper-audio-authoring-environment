@@ -1,5 +1,5 @@
-import { memo } from 'react';
-import { getRectOfNodes, NodeProps, NodeToolbar, useReactFlow, useStore, useStoreApi, NodeResizer } from 'reactflow';
+import { memo, useState } from 'react';
+import { getRectOfNodes, NodeProps, NodeToolbar, useReactFlow, useStore, useStoreApi, NodeResizer, useNodes } from 'reactflow';
 
 import useDetachNodes from './useDetachNodes';
 import React from 'react';
@@ -9,9 +9,11 @@ const padding = 25;
 
 function PlaylistNode({ id }: NodeProps) {
   const store = useStoreApi();
-  
-  
-  const { deleteElements } = useReactFlow();
+
+  const [playlistName, setPlaylistName] = useState('');
+
+
+  const { deleteElements, setNodes } = useReactFlow();
   const detachNodes = useDetachNodes();
   const { minWidth, minHeight, hasChildNodes } = useStore((store) => {
     const childNodes = Array.from(store.nodeInternals.values()).filter((n) => n.parentNode === id);
@@ -36,11 +38,56 @@ function PlaylistNode({ id }: NodeProps) {
     detachNodes(childNodeIds, id);
   };
 
+  const updatePlaylistName = () => {
+    const childNodeIds = Array.from(store.getState().nodeInternals.values())
+      .filter((n) => n.parentNode === id)
+      .map((n) => n.id);
+  
+    const updatedNodes = store
+      .getState()
+      .getNodes()
+      .map((node) => {
+        if (childNodeIds.includes(node.id)) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              playlist: playlistName,
+            },
+          };
+        }
+        return node;
+      });
+  
+    const playlistNode = updatedNodes.find((node) => node.id === id);
+    if (playlistNode) {
+      playlistNode.data = {
+        ...playlistNode.data,
+        playlist: playlistName,
+      };
+    }
+  
+    setNodes(updatedNodes);
+  };
+  
+
+
   return (
     <div style={{ minWidth, minHeight }}>
+        <div className="playlist-name">{playlistName}</div> {/* Display the playlist name above the playlist node */}
+
       <NodeResizer lineStyle={lineStyle} minWidth={minWidth} minHeight={minHeight} />
       <NodeToolbar className="nodrag">
         <button onClick={onDelete}>Delete</button>
+        
+        <input
+        type="text"
+        placeholder="Enter playlist name"
+        value={playlistName}
+        onChange={(e) => setPlaylistName(e.target.value)}
+      />
+      <button onClick={updatePlaylistName}>Set Playlist Name</button>
+      
         {hasChildNodes && <button onClick={onDetach}>Ungroup</button>}
       </NodeToolbar>
     </div>
