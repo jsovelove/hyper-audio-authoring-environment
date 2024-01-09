@@ -18,6 +18,9 @@ export default () => {
       <div className="dndnode attribute" onDragStart={(event) => onDragStart(event, 'attribute')} draggable>
         Attribute Node
       </div>
+      <div className="dndnode attribute" onDragStart={(event) => onDragStart(event, 'audio')} draggable>
+        Audio Node
+      </div>
       
       <div className="description">Utterance</div>
       <div className="dndnode utterance" onDragStart={(event) => onDragStart(event, 'textUpdater')} draggable>

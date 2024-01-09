@@ -24,6 +24,7 @@ import DatabaseView from './DatabaseView';
 import { sortNodes, getId, getNodePositionInsideParent } from './utils';
 import SelectedNodesToolbar from './SelectedNodesToolbar';
 import '@reactflow/node-resizer/dist/style.css';
+import demoGraph from './graph.json';
 
 
 const proOptions = {
@@ -69,6 +70,11 @@ function FlowComponent() {
             reader.onerror = reject;
         });
     };
+
+    const loadDemoGraph = () => {
+        setNodes(demoGraph.nodes);
+        setEdges(demoGraph.edges);
+      };
 
     const handleAudioFilesReceived = async (files) => {
         const spacing = 50;
@@ -219,8 +225,28 @@ function FlowComponent() {
         setShowDatabaseView(!showDatabaseView);
     };
 
+
+    const saveGraphAsJson = () => {      
+      const graph = {
+        nodes: nodes.map(node => ({ ...node })),
+        edges: edges.map(edge => ({ ...edge }))
+      };
+    
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(graph, null, 2));
+      const downloadAnchorNode = document.createElement('a');
+      downloadAnchorNode.setAttribute("href", dataStr);
+      downloadAnchorNode.setAttribute("download", "graph.json");
+      document.body.appendChild(downloadAnchorNode);
+      downloadAnchorNode.click();
+      downloadAnchorNode.remove();
+    }
+    
+
     return (
         <><div className="reactflow-wrapper" ref={reactFlowWrapper}>
+                  <button onClick={loadDemoGraph}>Load Demo</button>
+                  <button onClick={saveGraphAsJson}>Save Graph</button>
+
             <AudioDropzone onAudioFilesReceived={handleAudioFilesReceived} />
             <ReactFlow
                 nodes={nodes}

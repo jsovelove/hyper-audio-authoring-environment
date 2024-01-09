@@ -86,6 +86,9 @@ body {
 }
 
 .branching-point-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 70px;
   padding: 4px;
   border: 1px solid #eee;
@@ -94,18 +97,16 @@ body {
   justify-content: center;
   align-items: center;
   cursor: grab;
+  color: white;
 }
 
+.branching-point-node svg {
+  fill: white;
+}
+
+
 .playlist-node {
-  width: 300px; 
-  height: 300px;
-  background-color: rgba(204, 173, 173, 0.363);
-  border: 2px dashed #000000;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  background-color: rgba(238, 238, 238, 0.363);
 }
 
 
@@ -145,13 +146,18 @@ body {
 
 .audio-node-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   border: 1px solid #ccc;
   padding: 8px;
   border-radius: 4px;
   width: 300px;
-  overflow: hidden;
-  
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .audio-control-button {
@@ -160,8 +166,13 @@ body {
 
 .waveform-container {
   flex-grow: 1;
-  min-width: 200px;
   height: 100px;
   overflow: hidden;
 }
 
+.node-name-display {
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: white;
+}

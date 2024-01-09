@@ -1,17 +1,17 @@
 import { memo, useState } from 'react';
 import { getRectOfNodes, NodeProps, NodeToolbar, useReactFlow, useStore, useStoreApi, NodeResizer, useNodes } from 'reactflow';
-
+import './index.css';
 import useDetachNodes from './useDetachNodes';
 import React from 'react';
 
 const lineStyle = { borderColor: 'white' };
 const padding = 25;
 
-function PlaylistNode({ id }: NodeProps) {
+function PlaylistNode({ id, data}: NodeProps) {
   const store = useStoreApi();
 
   const [playlistName, setPlaylistName] = useState('');
-
+  
 
   const { deleteElements, setNodes } = useReactFlow();
   const detachNodes = useDetachNodes();
@@ -74,7 +74,7 @@ function PlaylistNode({ id }: NodeProps) {
 
   return (
     <div style={{ minWidth, minHeight }}>
-        <div className="playlist-name">{playlistName}</div> {/* Display the playlist name above the playlist node */}
+        <div className="playlist-name">{data.playlist && <div className="playlist-name">{data.playlist}</div>}</div>
 
       <NodeResizer lineStyle={lineStyle} minWidth={minWidth} minHeight={minHeight} />
       <NodeToolbar className="nodrag">
