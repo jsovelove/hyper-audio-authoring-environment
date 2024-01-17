@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, memo } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { Handle, Position, NodeToolbar, useStore, useReactFlow } from 'reactflow';
-import useDetachNodes from './useDetachNodes';
+import useDetachNodes from '../../utils/useDetachNodes';
 
 const CustomAudioNode = ({ data, isConnectable, id }) => {
   const { setNodes } = useReactFlow();

@@ -1,7 +1,6 @@
 import { memo, useState } from 'react';
 import { getRectOfNodes, NodeProps, NodeToolbar, useReactFlow, useStore, useStoreApi, NodeResizer, useNodes } from 'reactflow';
-import './index.css';
-import useDetachNodes from './useDetachNodes';
+import useDetachNodes from '../../utils/useDetachNodes';
 import React from 'react';
 
 const lineStyle = { borderColor: 'white' };

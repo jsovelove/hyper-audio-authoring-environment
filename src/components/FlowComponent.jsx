@@ -12,19 +12,18 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import Sidebar from './Sidebar';
-import './index.css';
 import AudioDropzone from './AudioDropzone';
-import useAudio from './useAudio';
-import TextUpdaterNode from './TextUpdaterNode';
-import BranchingPointNode from './BranchingPointNode';
-import PlaylistNode from './PlaylistNode';
-import AttributeNode from './AttributeNode';
-import CustomAudioNode from './AudioNode';
+import useAudio from '../utils/useAudio';
+import TextUpdaterNode from './nodes/TextUpdaterNode';
+import BranchingPointNode from './nodes/BranchingPointNode';
+import PlaylistNode from './nodes/PlaylistNode';
+import AttributeNode from './nodes/AttributeNode';
+import CustomAudioNode from './nodes/AudioNode';
 import DatabaseView from './DatabaseView';
-import { sortNodes, getId, getNodePositionInsideParent } from './utils';
-import SelectedNodesToolbar from './SelectedNodesToolbar';
+import { sortNodes, getId, getNodePositionInsideParent } from '../utils/utils';
+import SelectedNodesToolbar from '../utils/SelectedNodesToolbar';
 import '@reactflow/node-resizer/dist/style.css';
-import demoGraph from './graph.json';
+import demoGraph from '../graph.json';
 
 
 const proOptions = {

@@ -1,5 +1,5 @@
 import ReactFlow, { ReactFlowProvider } from 'reactflow';
-import FlowComponent from './FlowComponent';
+import FlowComponent from './components/FlowComponent.jsx';
 
 function App() {
   return (
