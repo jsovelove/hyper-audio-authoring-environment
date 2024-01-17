@@ -319,7 +319,7 @@
       "type": "audio",
       "data": {
         "name": "Introduction",
-        "audioSource": "src/audiofiles/intro_dialogue2.wav"
+        "audioSource": "./src/audiofiles/intro_dialogue2.wav"
       },
       "position": {
         "x": 300,
